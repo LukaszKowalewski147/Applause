@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".Login">
+
+    <RelativeLayout
+        android:id="@+id/layout_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/custom_menu_box"
+        android:padding="30dp">
+
+        <TextView
+            android:id="@+id/login_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Logowanie"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textColor="@color/native_dark_red"
+            android:textSize="28dp" />
+
+        <EditText
+            android:id="@+id/login_input"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:elevation="5dp"
+            android:layout_below="@+id/login_header"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@color/white"
+            android:hint="Login:"
+            android:textColorHint="@color/native_dark_red"
+            android:textColor="@color/native_dark_red"/>
+
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:elevation="5dp"
+            android:layout_below="@+id/login_input"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:hint="Hasło:"
+            android:textColorHint="@color/native_dark_red"
+            android:textColor="@color/native_dark_red"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/login_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/password_input"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_button"
+            android:elevation="5dp"
+            android:text="Zaloguj"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/register_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_btn"
+            android:layout_alignStart="@+id/registration_btn"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="Nie masz konta?"
+            android:textAllCaps="false"
+            android:textColor="@color/native_dark_red"
+            android:textSize="12dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registration_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/register_hint"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/custom_button"
+            android:elevation="5dp"
+            android:text="Załóż konto"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/background_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/opera2" />
+
+</RelativeLayout>

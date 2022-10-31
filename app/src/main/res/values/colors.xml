@@ -9,5 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="native_dark_red">#250000</color>
     <color name="native_red">#6E0000</color>
-    <color name="menu_soft">#6F6F6F</color>
+    <color name="menu_soft">#A7A7A7</color>
 </resources>
