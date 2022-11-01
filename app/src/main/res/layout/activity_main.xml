@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@drawable/custom_menu_box"
-        android:padding="30dp">
+        android:padding="30dp"
+        android:clipToPadding="false">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/start_btn"
@@ -44,8 +45,8 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/stats_btn"
-            android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
             android:background="@drawable/custom_button"
             android:text="Ranking"
             android:textAllCaps="false"
