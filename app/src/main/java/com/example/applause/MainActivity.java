@@ -1,32 +1,59 @@
 package com.example.applause;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+
+    AppCompatButton settingsBtn;
+    AppCompatButton statsBtn;
+    AppCompatButton rankingBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        settingsBtn = findViewById(R.id.settings_btn);
+        statsBtn = findViewById(R.id.stats_btn);
+        rankingBtn = findViewById(R.id.ranking_btn);
+
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSettings();
+            }
+        });
+        statsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openStats();
+            }
+        });
+        rankingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRanking();
+            }
+        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.drop_menu, menu);
-        return true;
+    private void openSettings() {
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Toast.makeText(this, "Ustawienia", Toast.LENGTH_SHORT).show();
-        return super.onOptionsItemSelected(item);
+    private void openStats() {
+        Intent intent = new Intent(this, Statistics.class);
+        startActivity(intent);
+    }
+
+    private void openRanking() {
+        Intent intent = new Intent(this, Ranking.class);
+        startActivity(intent);
     }
 }

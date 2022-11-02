@@ -4,16 +4,30 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_app"
         android:supportsRtl="true"
         android:theme="@style/Theme.Applause">
         <activity
+            android:name=".Ranking"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+        <activity
+            android:name=".Statistics"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+        <activity
+            android:name=".Settings"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+        <activity
             android:name=".Registration"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".Login"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +37,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"/>
+            android:screenOrientation="portrait"
+            android:exported="true" />
     </application>
 
 </manifest>

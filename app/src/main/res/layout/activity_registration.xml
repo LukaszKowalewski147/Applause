@@ -8,82 +8,94 @@
     tools:context=".Registration">
 
     <RelativeLayout
-        android:id="@+id/layout_registration"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@drawable/custom_menu_box"
-        android:padding="30dp"
-        android:clipToPadding="false">
+        android:layout_above="@+id/background_img"
+        android:layout_alignParentTop="true">
 
-        <TextView
-            android:id="@+id/registration_header"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:text="Rejestracja"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textColor="@color/native_dark_red"
-            android:textSize="28dp" />
+            android:layout_centerInParent="true"
+            android:background="@drawable/custom_menu_box"
+            android:clipToPadding="false"
+            android:padding="30dp">
 
-        <EditText
-            android:id="@+id/login_input"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:elevation="5dp"
-            android:layout_below="@+id/registration_header"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:background="@color/white"
-            android:hint="Login:"
-            android:textColorHint="@color/native_dark_red"
-            android:textColor="@color/native_dark_red"/>
+            <TextView
+                android:id="@+id/registration_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="Rejestracja"
+                android:textAllCaps="false"
+                android:textColor="@color/native_dark_red"
+                android:textSize="28dp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/password_input"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:elevation="5dp"
-            android:layout_below="@+id/login_input"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:hint="Hasło:"
-            android:textColorHint="@color/native_dark_red"
-            android:textColor="@color/native_dark_red"/>
+            <EditText
+                android:id="@+id/login_input"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/registration_header"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:background="@color/white"
+                android:elevation="5dp"
+                android:hint="Login:"
+                android:padding="5dp"
+                android:textColor="@color/native_dark_red"
+                android:textColorHint="@color/native_dark_red"
+                android:textSize="18dp" />
 
-        <EditText
-            android:id="@+id/password_check_input"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:elevation="5dp"
-            android:layout_below="@+id/password_input"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:hint="Powtórz hasło:"
-            android:textColorHint="@color/native_dark_red"
-            android:textColor="@color/native_dark_red"/>
+            <EditText
+                android:id="@+id/password_input"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/login_input"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:elevation="5dp"
+                android:hint="Hasło:"
+                android:inputType="textPassword"
+                android:padding="5dp"
+                android:textColor="@color/native_dark_red"
+                android:textColorHint="@color/native_dark_red"
+                android:textSize="18dp" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/register_btn"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/password_check_input"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/custom_button"
-            android:elevation="5dp"
-            android:text="Zarejestruj"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="18dp" />
+            <EditText
+                android:id="@+id/password_check_input"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/password_input"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:elevation="5dp"
+                android:hint="Powtórz hasło:"
+                android:inputType="textPassword"
+                android:padding="5dp"
+                android:textColor="@color/native_dark_red"
+                android:textColorHint="@color/native_dark_red"
+                android:textSize="18dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/register_btn"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_below="@+id/password_check_input"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_button"
+                android:elevation="5dp"
+                android:text="Zarejestruj"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -93,6 +105,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:adjustViewBounds="true"
-        android:src="@drawable/opera2" />
+        android:src="@drawable/opera_seats" />
 
 </RelativeLayout>
