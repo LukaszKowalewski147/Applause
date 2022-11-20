@@ -30,11 +30,25 @@
             android:clipToPadding="false"
             android:padding="30dp">
 
+            <TextView
+                android:id="@+id/main_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="Menu główne"
+                android:textAllCaps="false"
+                android:textColor="@color/native_dark_red"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/start_btn"
                 android:layout_width="250dp"
                 android:layout_height="60dp"
-                android:layout_alignParentTop="true"
+                android:layout_below="@id/main_header"
+                android:layout_marginTop="32dp"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/custom_button"
                 android:elevation="5dp"
@@ -49,7 +63,7 @@
                 android:layout_height="60dp"
                 android:layout_below="@+id/start_btn"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/custom_button"
                 android:elevation="5dp"
                 android:text="Statystyki"
@@ -63,7 +77,7 @@
                 android:layout_height="60dp"
                 android:layout_below="@+id/stats_btn"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/custom_button"
                 android:elevation="5dp"
                 android:text="Ranking"

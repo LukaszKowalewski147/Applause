@@ -63,13 +63,26 @@
                 android:textColor="@color/native_dark_red"
                 android:textColorHint="@color/native_dark_red" />
 
+            <TextView
+                android:id="@+id/login_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/password_input"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="Podpowiedź logowania"
+                android:textAllCaps="false"
+                android:textColor="@color/native_dark_red"
+                android:textSize="14dp" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/login_btn"
                 android:layout_width="250dp"
                 android:layout_height="60dp"
-                android:layout_below="@+id/password_input"
+                android:layout_below="@+id/login_hint"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/custom_button"
                 android:elevation="5dp"
                 android:text="Zaloguj"

@@ -10,6 +10,7 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
     AppCompatButton settingsBtn;
+    AppCompatButton startBtn;
     AppCompatButton statsBtn;
     AppCompatButton rankingBtn;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         settingsBtn = findViewById(R.id.settings_btn);
+        startBtn = findViewById(R.id.start_btn);
         statsBtn = findViewById(R.id.stats_btn);
         rankingBtn = findViewById(R.id.ranking_btn);
 
@@ -26,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openSettings();
+            }
+        });
+        startBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                start();
             }
         });
         statsBtn.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
                 openRanking();
             }
         });
+    }
+
+    private void start() {
+        Intent intent = new Intent(this, Instruction.class);
+        startActivity(intent);
     }
 
     private void openSettings() {
