@@ -16,4 +16,14 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    
+    <string-array name="ranking_types">
+        <item>Średnia szybkość</item>
+        <item>Maksymalna szybkość</item>
+        <item>Średnia siła</item>
+        <item>Maksymalna siła</item>
+        <item>Jakość</item>
+        <item>Ilość</item>
+        <item>Czas reakcji</item>
+    </string-array>
 </resources>

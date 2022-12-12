@@ -3,6 +3,7 @@ package com.example.applause;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -36,6 +37,7 @@ public class ClapListener extends AppCompatActivity {
 
     private void stopListening() {
         accelerometerHandler.handleAccelerometerStop();
-        finish();
+        Intent intent = new Intent(this, Summary.class);
+        startActivity(intent);
     }
 }
