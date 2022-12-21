@@ -10,7 +10,7 @@ import androidx.core.app.ActivityCompat;
 
 public class Settings extends AppCompatActivity {
 
-    AppCompatButton logoutBtn;
+    private AppCompatButton logoutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

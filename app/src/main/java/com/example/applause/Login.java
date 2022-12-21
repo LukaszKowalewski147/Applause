@@ -9,8 +9,8 @@ import android.view.View;
 
 public class Login extends AppCompatActivity {
 
-    AppCompatButton loginBtn;
-    AppCompatButton registrationBtn;
+    private AppCompatButton loginBtn;
+    private AppCompatButton registrationBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -34,6 +34,16 @@ public class Helper {
         return array;
     }
 
+    public static LinkedList<AccelerationVector> convertToLinkedList(double[] zArray, long[] timeArray) {
+        LinkedList<AccelerationVector> accelerationVectors = new LinkedList<>();
+
+        for (int i = 0; i < zArray.length; i++) {
+            AccelerationVector vector = new AccelerationVector(zArray[i], timeArray[i]);
+            accelerationVectors.add(vector);
+        }
+        return accelerationVectors;
+    }
+
     public static double changePrecision(double value, int precision) {
         BigDecimal bd = BigDecimal.valueOf(value);
         bd = bd.setScale(precision, RoundingMode.HALF_UP);

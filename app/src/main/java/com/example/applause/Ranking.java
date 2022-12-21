@@ -16,10 +16,10 @@ import java.util.ArrayList;
 
 public class Ranking extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    Spinner rankingTypeSpinner;
-    RecyclerView recyclerView;
-    CustomAdapter adapter;
-    ArrayList<User> users;
+    private Spinner rankingTypeSpinner;
+    private RecyclerView recyclerView;
+    private CustomAdapter adapter;
+    private ArrayList<User> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

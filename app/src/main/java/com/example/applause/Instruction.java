@@ -11,8 +11,8 @@ import android.widget.ImageView;
 
 public class Instruction extends AppCompatActivity {
 
-    ImageView instruction;
-    AppCompatButton understandBtn;
+    private ImageView instruction;
+    private AppCompatButton understandBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

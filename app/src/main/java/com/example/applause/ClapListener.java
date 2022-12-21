@@ -7,16 +7,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.Queue;
+
 public class ClapListener extends AppCompatActivity {
 
-    AccelerometerHandler accelerometerHandler;
-
-    AppCompatButton stopListeningBtn;
+    private SessionType sessionType;
+    private AccelerometerHandler accelerometerHandler;
+    private AppCompatButton stopListeningBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clap_listener);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            sessionType = (SessionType) extras.get("sessionTypeKey");
+        } else {
+            //handle
+        }
 
         accelerometerHandler = new AccelerometerHandler(this);
         startListening();
@@ -36,8 +45,14 @@ public class ClapListener extends AppCompatActivity {
     }
 
     private void stopListening() {
-        accelerometerHandler.handleAccelerometerStop();
-        Intent intent = new Intent(this, Summary.class);
+        Queue<AccelerationVector> accelerationVectors = accelerometerHandler.handleAccelerometerStop();
+        double[] zArray = Helper.convertToDoubleArray(accelerationVectors);
+        long[] timeArray = Helper.convertTimeToLongArray(accelerationVectors);
+
+        Intent intent = new Intent(this, ClapsSummary.class);
+        intent.putExtra("sessionTypeKey", sessionType);
+        intent.putExtra("zArrayKey", zArray);
+        intent.putExtra("timeArrayKey", timeArray);
         startActivity(intent);
     }
 }

@@ -9,14 +9,14 @@ import android.widget.RelativeLayout;
 
 public class Statistics extends AppCompatActivity {
 
-    RelativeLayout reflexLayout;
+    private RelativeLayout reflexLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
-        reflexLayout = findViewById(R.id.reflex_stats_layout);
+        reflexLayout = findViewById(R.id.avg_reflex_stats_layout);
 
         reflexLayout.setOnClickListener(new View.OnClickListener() {
             @Override

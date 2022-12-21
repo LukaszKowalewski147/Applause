@@ -10,12 +10,12 @@ public class Displacement {
 
     public Displacement() {
         entries = new LinkedList<>();
-        limit = 1000;
+        limit = 600; // ~0.005s for sample - 200 = 1s
 
         initializeData();
     }
 
-    public Queue<AccelerationVector> getEntries(){
+    public Queue<AccelerationVector> getEntries() {
         return entries;
     }
 

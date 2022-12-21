@@ -9,10 +9,10 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    AppCompatButton settingsBtn;
-    AppCompatButton startBtn;
-    AppCompatButton statsBtn;
-    AppCompatButton rankingBtn;
+    private AppCompatButton settingsBtn;
+    private AppCompatButton startBtn;
+    private AppCompatButton statsBtn;
+    private AppCompatButton rankingBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

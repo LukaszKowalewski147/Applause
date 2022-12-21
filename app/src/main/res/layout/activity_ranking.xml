@@ -11,16 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:padding="4dp"
         android:layout_above="@+id/background_img">
 
         <RelativeLayout
             android:id="@+id/ranking_type_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
+            android:background="@drawable/custom_menu_box"
             android:clipToPadding="false"
-            android:background="@drawable/custom_menu_box">
+            android:gravity="center"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/ranking_txt"
@@ -45,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ranking_type_layout"
+            android:layout_marginTop="4dp"
             android:layout_alignParentBottom="true" />
 
     </RelativeLayout>

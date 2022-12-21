@@ -9,7 +9,7 @@ import android.view.View;
 
 public class Registration extends AppCompatActivity {
 
-    AppCompatButton registerBtn;
+    private AppCompatButton registerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

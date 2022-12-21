@@ -36,20 +36,9 @@ public class AccelerometerHandler extends AppCompatActivity implements SensorEve
         contactOccured = new AtomicBoolean(false);
     }
 
-    public void handleAccelerometerStop() {
+    public Queue<AccelerationVector> handleAccelerometerStop() {
         stopAccelerometer();
-        Queue<AccelerationVector> accelerationVectors = displacement.getEntries();
-        double[] zArray = Helper.convertToDoubleArray(accelerationVectors);
-        long[] timeArray = Helper.convertTimeToLongArray(accelerationVectors);
-
-        openAnalyzer(zArray, timeArray); //przejscie do analizy danych z akcelerometru
-    }
-
-    private void openAnalyzer(double[] zArray, long[] timeArray) {
-        //Intent intent = new Intent(this, ???Nazwa aktywnosci podsumowania???.class);
-        //intent.putExtra("zArrayKey", zArray);
-        //intent.putExtra("timeArrayKey", timeArray);
-        //startActivity(intent);
+        return displacement.getEntries();
     }
 
     public void startAccelerometer() {
