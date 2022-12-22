@@ -4,15 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Queue;
 
 public class ClapListener extends AppCompatActivity {
 
     private SessionType sessionType;
     private AccelerometerHandler accelerometerHandler;
+    private SoundManager soundManager;
+
     private AppCompatButton stopListeningBtn;
 
     @Override
@@ -27,9 +35,6 @@ public class ClapListener extends AppCompatActivity {
             //handle
         }
 
-        accelerometerHandler = new AccelerometerHandler(this);
-        startListening();
-
         stopListeningBtn = findViewById(R.id.stop_listening_btn);
 
         stopListeningBtn.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +43,33 @@ public class ClapListener extends AppCompatActivity {
                 stopListening();
             }
         });
+
+        soundManager = new SoundManager(this);
+        accelerometerHandler = new AccelerometerHandler(this);
+
+        startListener();
+    }
+
+    private void startListener() {
+        TextView countDownTxt = (TextView) findViewById(R.id.clap_listener_countdown);
+        countDownTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 200f);
+        countDownTxt.setTextColor(Color.parseColor("#FF0000"));
+
+        new CountDownTimer(5000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                countDownTxt.setText(new SimpleDateFormat("s").format(new Date(millisUntilFinished+1000)));
+                soundManager.playCountdownSound();
+            }
+
+            public void onFinish() {
+                soundManager.playStartClappingSound();
+                countDownTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40f);
+                countDownTxt.setText("Klaszcz!");
+
+                startListening();
+            }
+        }.start();
     }
 
     private void startListening() {

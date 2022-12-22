@@ -1,16 +1,16 @@
 package com.example.applause;
 
 public class Clap {
-    private final double force;
+    private final double zAcceleration;
     private final long time;
 
-    public Clap(double force, long time) {
-        this.force = force;
+    public Clap(double zAcceleration, long time) {
+        this.zAcceleration = zAcceleration;
         this.time = time;
     }
 
-    public double getForce() {
-        return force;
+    public double getzAcceleration() {
+        return zAcceleration;
     }
 
     public long getTime() {

@@ -56,10 +56,10 @@ public class ClapsAnalyzer {
                 timeSinceLastClap = timeInterwal;
                 timeInterwal = 0;
 
-                if (isDoublePointClap(i)) {
+                if (isDoublePointClap(i)) { // check second sample
                     acceleration += accelerationVectors.get(i + 1).getZAxis();
                     timeInterwal += accelerationVectors.get(i + 1).getTime();
-                    if (isDoublePointClap(i + 1)) {
+                    if (isDoublePointClap(i + 1)) { //check third sample
                         acceleration += accelerationVectors.get(i + 2).getZAxis();
                         timeInterwal += accelerationVectors.get(i + 2).getTime();
                         ++i;
@@ -109,11 +109,13 @@ public class ClapsAnalyzer {
     }
 
     private double calculateAvgForce() {
+        double zAcceleration = 0.0d;
         double force = 0.0d;
         double avgForce = 0.0d;
 
         for (int i = 0; i < claps.size(); i++) {
-            force = claps.get(i).getForce();
+            zAcceleration = claps.get(i).getzAcceleration();
+            force = calculateForce(zAcceleration);
             avgForce += force;
         }
         avgForce /= claps.size();
@@ -121,11 +123,13 @@ public class ClapsAnalyzer {
     }
 
     private double calculateMaxForce() {
+        double zAcceleration = 0.0d;
         double force = 0.0d;
         double maxForce = 0.0d;
 
         for (int i = 0; i < claps.size(); i++) {
-            force = claps.get(i).getForce();
+            zAcceleration = claps.get(i).getzAcceleration();
+            force = calculateForce(zAcceleration);
             if (force > maxForce)
                 maxForce = force;
         }
@@ -142,12 +146,11 @@ public class ClapsAnalyzer {
         return reflex;
     }
 
-    private double calculatePower(int sample) {
-        double power = 0.0d;
+    private double calculateForce(double acceleration) {
+        double force = 0.0d;
         double mass = 0.2d; // 200 gramów = 0.2kg - masa układu
-        double acceleration = accelerationVectors.get(sample).getZAxis();
-        power = mass * acceleration;
-        return Helper.changePrecision(power, 1);
+        force = mass * acceleration;
+        return Helper.changePrecision(force, 2);
     }
 
     private double getTimeInMiliseconds(long time) {

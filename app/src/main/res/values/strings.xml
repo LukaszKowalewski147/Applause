@@ -19,11 +19,14 @@
     
     <string-array name="ranking_types">
         <item>Średnia szybkość</item>
-        <item>Maksymalna szybkość</item>
+        <item>Najwyższa szybkość</item>
         <item>Średnia siła</item>
-        <item>Maksymalna siła</item>
-        <item>Jakość</item>
-        <item>Ilość</item>
-        <item>Czas reakcji</item>
+        <item>Największa siła</item>
+        <item>Średnia jakość</item>
+        <item>Najwyższa jakość</item>
+        <item>Średnia ilość</item>
+        <item>Największa ilość</item>
+        <item>Średni czas reakcji</item>
+        <item>Najlepszy czas reakcji</item>
     </string-array>
 </resources>

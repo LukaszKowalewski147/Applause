@@ -10,7 +10,7 @@ public class Displacement {
 
     public Displacement() {
         entries = new LinkedList<>();
-        limit = 600; // ~0.005s for sample - 200 = 1s
+        limit = 1000; // ~0.005s for sample - 200 = 1s
 
         initializeData();
     }
