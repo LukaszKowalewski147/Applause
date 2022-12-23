@@ -21,11 +21,11 @@ public class PreClapMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre_clap_menu);
 
-        singleSpeedBtn = findViewById(R.id.single_speed);
-        singleForceBtn = findViewById(R.id.single_force);
-        singleQualityBtn = findViewById(R.id.single_quality);
-        singleQuantityBtn = findViewById(R.id.single_quantity);
-        singleReflexBtn = findViewById(R.id.single_reflex);
+        singleSpeedBtn = findViewById(R.id.speed_btn);
+        singleForceBtn = findViewById(R.id.force_btn);
+        singleQualityBtn = findViewById(R.id.quality_btn);
+        singleQuantityBtn = findViewById(R.id.quantity_btn);
+        singleReflexBtn = findViewById(R.id.reflex_btn);
 
         singleSpeedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
