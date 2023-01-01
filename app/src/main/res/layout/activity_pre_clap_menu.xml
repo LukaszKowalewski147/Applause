@@ -30,26 +30,25 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    android:text="Co chcesz zbadać?"
+                    android:text="Co chcesz sprawdzić?"
                     android:textAllCaps="false"
                     android:textColor="@color/native_dark_red"
                     android:textSize="28dp"
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:id="@+id/first_row_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="90dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@id/singleplayer_header"
                     android:layout_centerHorizontal="true"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:layout_marginTop="16dp">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/speed_btn"
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_button"
                         android:text="Szybkość"
@@ -58,9 +57,9 @@
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/force_btn"
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_button"
                         android:text="Siła"
@@ -69,49 +68,31 @@
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/quality_btn"
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_button"
                         android:text="Jakość"
                         android:textColor="@color/white"
                         android:textSize="14dp"/>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/second_row_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:layout_below="@id/first_row_layout"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="4dp"
-                    android:orientation="horizontal">
-
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/reflex_btn"
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_button"
                         android:text="Czas&#10;reakcji"
                         android:textColor="@color/white"
                         android:textSize="14dp"/>
 
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_app" />
-
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/quantity_btn"
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_button"
                         android:text="Ilość"

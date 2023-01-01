@@ -76,7 +76,7 @@ public class ClapsAnalyzer {
     private boolean isDoublePointClap(int i) {
         if (i + 1 >= accelerationVectors.size())
             return false;
-        return accelerationVectors.get(i + 1).getZAxis() > (double) threshold / 2.0d;
+        return accelerationVectors.get(i + 1).getZAxis() > (double) threshold / 3.0d;
     }
 
     private double calculateAvgSpeed() {

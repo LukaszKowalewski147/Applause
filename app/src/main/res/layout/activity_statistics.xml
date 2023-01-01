@@ -212,7 +212,7 @@
                 android:padding="4dp">
 
                 <RelativeLayout
-                    android:id="@+id/quality_stats_layout"
+                    android:id="@+id/avg_quality_stats_layout"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="8dp"
