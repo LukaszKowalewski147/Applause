@@ -14,11 +14,15 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 public class StatsGraph extends AppCompatActivity {
 
     private GraphView graph;
+    private SessionType sessionType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats_graph);
+
+        Bundle extras = getIntent().getExtras();
+        sessionType = (SessionType) extras.get("sessionTypeKey");
 
         graph = findViewById(R.id.graph);
         prepareGraph();

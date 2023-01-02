@@ -36,71 +36,71 @@ public class Statistics extends AppCompatActivity {
         avgReflexLayout = findViewById(R.id.avg_reflex_stats_layout);
         maxReflexLayout = findViewById(R.id.max_reflex_stats_layout);
 
-
         avgSpeedLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGraph();
+                openGraph(SessionType.SPEED);
             }
         });
         maxSpeedLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGraph();
+                openGraph(SessionType.SPEED);
             }
         });
         avgForceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGraph();
+                openGraph(SessionType.FORCE);
             }
         });
         maxForceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGraph();
+                openGraph(SessionType.FORCE);
             }
         });
         avgQualityLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGraph();
+                openGraph(SessionType.QUALITY);
             }
         });
         maxQualityLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGraph();
+                openGraph(SessionType.QUALITY);
             }
         });
         avgQuantityLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGraph();
+                openGraph(SessionType.QUANTITY);
             }
         });
         maxQuantityLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGraph();
+                openGraph(SessionType.QUANTITY);
             }
         });
         avgReflexLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGraph();
+                openGraph(SessionType.REFLEX);
             }
         });
         maxReflexLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGraph();
+                openGraph(SessionType.REFLEX);
             }
         });
     }
 
-    private void openGraph() {
+    private void openGraph(SessionType sessionType) {
         Intent intent = new Intent(this, StatsGraph.class);
+        intent.putExtra("sessionTypeKey", sessionType);
         startActivity(intent);
     }
 }
