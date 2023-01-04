@@ -108,6 +108,20 @@
                 android:textColor="@color/white"
                 android:textSize="18dp" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/delete_btn"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_below="@+id/register_btn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_button"
+                android:elevation="5dp"
+                android:text="Usuń konto"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+
         </RelativeLayout>
 
     </RelativeLayout>

@@ -16,6 +16,7 @@ public class Login extends AppCompatActivity {
     private TextView loginHint;
     private AppCompatButton loginBtn;
     private AppCompatButton registrationBtn;
+    private AppCompatButton showAccountsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class Login extends AppCompatActivity {
         loginHint = findViewById(R.id.login_hint);
         loginBtn = findViewById(R.id.login_btn);
         registrationBtn = findViewById(R.id.registration_btn);
+        showAccountsBtn = findViewById(R.id.show_accounts_btn);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +42,13 @@ public class Login extends AppCompatActivity {
                 openRegistrationPage();
             }
         });
+        showAccountsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAccounts();
+            }
+        });
+
         loginHint.setText("");
     }
 
@@ -62,5 +71,10 @@ public class Login extends AppCompatActivity {
     private void openRegistrationPage() {
         Intent intent = new Intent(this, Registration.class);
         startActivity(intent);
+    }
+
+    private void showAccounts() {
+        JSONCommunicator jsonCommunicator = new JSONCommunicator(this);
+        jsonCommunicator.showAccounts();
     }
 }

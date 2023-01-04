@@ -1,6 +1,7 @@
 package com.example.applause;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,20 +17,21 @@ import java.nio.charset.StandardCharsets;
 public class JSONCommunicator {
 
     Context context;
-    JSONObject jsonObject;
+    //JSONObject jsonObject;
 
     public JSONCommunicator(Context context) {
         this.context = context;
-        try {
-            jsonObject = new JSONObject(readJson());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        //try {
+        //    jsonObject = new JSONObject(readJson());
+        //} catch (JSONException e) {
+        //    e.printStackTrace();
+        //}
     }
 
     public boolean loginConfirmed(String login, String password) {
         boolean confirmed = false;
         try {
+            JSONObject jsonObject = new JSONObject(readJson());
             JSONArray usersArray = jsonObject.getJSONArray("users");
             for (int i = 0; i < usersArray.length(); i++) {
                 JSONObject user = usersArray.getJSONObject(i);
@@ -46,15 +48,64 @@ public class JSONCommunicator {
         return confirmed;
     }
 
-    public void writeJson(String login, String password) {
+    public void registerAccount(String login, String password) {
         try {
+            JSONObject jsonObject = new JSONObject(readJson());
+            JSONObject newAccount = new JSONObject();
             JSONArray usersArray = jsonObject.getJSONArray("users");
-            JSONObject object = new JSONObject();
-            object.put("login", login);
-            object.put("password", password);
             JSONArray shotsArr = new JSONArray();
-            object.put("shots", shotsArr);
-            usersArray.put(object);
+
+            newAccount.put("login", login);
+            newAccount.put("password", password);
+            newAccount.put("shots", shotsArr);
+            usersArray.put(newAccount);
+            writeToFile(jsonObject);
+            Toast.makeText(context, "Konto " + login + " zarejestrowane" , Toast.LENGTH_SHORT).show();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Nie udało się zarejestrować konta" , Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void deleteAccount(String login) {
+        boolean deleted = false;
+        try {
+            JSONObject jsonObject = new JSONObject(readJson());
+            JSONArray usersArray = jsonObject.getJSONArray("users");
+
+            for (int i = 0; i < usersArray.length(); i++) {
+                JSONObject user = usersArray.getJSONObject(i);
+                if (user.getString("login").equals(login)) {
+                    usersArray.remove(i);
+                    deleted = true;
+                    Toast.makeText(context, "Konto " + login + " usunięte" , Toast.LENGTH_SHORT).show();
+                    break;
+                }
+            }
+            writeToFile(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Nie udało się usunąć konta" , Toast.LENGTH_SHORT).show();
+        }
+        if (!deleted)
+            Toast.makeText(context, "Nie znaleziono konta do usunięcia" , Toast.LENGTH_SHORT).show();
+    }
+
+    public void showAccounts() {
+        try {
+            JSONObject jsonObject = new JSONObject(readJson());
+            JSONArray usersArray = jsonObject.getJSONArray("users");
+
+            if (usersArray.length() == 0) {
+                Toast.makeText(context, "Brak kont do wyświetlenia", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            for (int i = 0; i < usersArray.length(); i++) {
+                JSONObject user = usersArray.getJSONObject(i);
+                String login = user.getString("login");
+                String password = user.getString("password");
+                Toast.makeText(context, "Login: " + login + "\n" + "Hasło: " + password, Toast.LENGTH_SHORT).show();
+            }
             writeToFile(jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -69,22 +120,6 @@ public class JSONCommunicator {
         }
         try {
             InputStream inputStream = new FileInputStream(file);
-            int jsonSize = inputStream.available();
-            byte[] buffer = new byte[jsonSize];
-            inputStream.read(buffer);
-            inputStream.close();
-            json = new String(buffer, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return json;
-    }
-
-    private String getJSONObject() {
-        String json = null;
-        try {
-            InputStream inputStream = context.getAssets().open("data.json");
             int jsonSize = inputStream.available();
             byte[] buffer = new byte[jsonSize];
             inputStream.read(buffer);
