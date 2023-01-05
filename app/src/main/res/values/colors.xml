@@ -10,7 +10,7 @@
     <color name="native_light_red">#500000</color>
     <color name="native_dark_red">#300000</color>
     <color name="native_red">#A10000</color>
-    <color name="menu_soft">#E6D3D3D3</color>
-    <color name="menu_hard">#E69A9A9A</color>
+    <color name="menu_soft">#CCD3D3D3</color>
+    <color name="menu_hard">#CC9A9A9A</color>
     <color name="settings_tile">#802B2B2B</color>
 </resources>

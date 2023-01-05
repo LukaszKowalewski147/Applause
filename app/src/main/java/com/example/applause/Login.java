@@ -53,12 +53,13 @@ public class Login extends AppCompatActivity {
     }
 
     private void logIn() {
+        loginHint.setText("");
         String login = loginTxt.getText().toString();
         String password = passwordTxt.getText().toString();
 
         JSONCommunicator jsonCommunicator = new JSONCommunicator(this);
-        if (jsonCommunicator.loginConfirmed(login, password))
-        {
+        if (jsonCommunicator.loginConfirmed(login, password)) {
+            Session.login = login;
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -74,6 +75,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void showAccounts() {
+        loginHint.setText("");
         JSONCommunicator jsonCommunicator = new JSONCommunicator(this);
         jsonCommunicator.showAccounts();
     }

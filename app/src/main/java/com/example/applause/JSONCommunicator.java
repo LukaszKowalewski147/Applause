@@ -17,19 +17,12 @@ import java.nio.charset.StandardCharsets;
 public class JSONCommunicator {
 
     Context context;
-    //JSONObject jsonObject;
 
     public JSONCommunicator(Context context) {
         this.context = context;
-        //try {
-        //    jsonObject = new JSONObject(readJson());
-        //} catch (JSONException e) {
-        //    e.printStackTrace();
-        //}
     }
 
     public boolean loginConfirmed(String login, String password) {
-        boolean confirmed = false;
         try {
             JSONObject jsonObject = new JSONObject(readJson());
             JSONArray usersArray = jsonObject.getJSONArray("users");
@@ -37,38 +30,17 @@ public class JSONCommunicator {
                 JSONObject user = usersArray.getJSONObject(i);
                 if (user.getString("login").equals(login)) {
                     if (user.getString("password").equals(password)) {
-                        confirmed = true;
-                        break;
+                        return true;
                     }
                 }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return confirmed;
+        return false;
     }
 
-    public void registerAccount(String login, String password) {
-        try {
-            JSONObject jsonObject = new JSONObject(readJson());
-            JSONObject newAccount = new JSONObject();
-            JSONArray usersArray = jsonObject.getJSONArray("users");
-            JSONArray shotsArr = new JSONArray();
-
-            newAccount.put("login", login);
-            newAccount.put("password", password);
-            newAccount.put("shots", shotsArr);
-            usersArray.put(newAccount);
-            writeToFile(jsonObject);
-            Toast.makeText(context, "Konto " + login + " zarejestrowane" , Toast.LENGTH_SHORT).show();
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(context, "Nie udało się zarejestrować konta" , Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void deleteAccount(String login) {
-        boolean deleted = false;
+    public boolean registerAccount(String login, String password) {
         try {
             JSONObject jsonObject = new JSONObject(readJson());
             JSONArray usersArray = jsonObject.getJSONArray("users");
@@ -76,9 +48,38 @@ public class JSONCommunicator {
             for (int i = 0; i < usersArray.length(); i++) {
                 JSONObject user = usersArray.getJSONObject(i);
                 if (user.getString("login").equals(login)) {
+                    Toast.makeText(context, "Login jest już zajęty" , Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            }
+            JSONObject newAccount = new JSONObject();
+            JSONArray shotsArr = new JSONArray();
+
+            newAccount.put("login", login);
+            newAccount.put("password", password);
+            newAccount.put("shots", shotsArr);
+            usersArray.put(newAccount);
+            writeToFile(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Nie udało się zarejestrować konta" , Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    public void deleteAccount() {
+        boolean deleted = false;
+        try {
+            JSONObject jsonObject = new JSONObject(readJson());
+            JSONArray usersArray = jsonObject.getJSONArray("users");
+
+            for (int i = 0; i < usersArray.length(); i++) {
+                JSONObject user = usersArray.getJSONObject(i);
+                if (user.getString("login").equals(Session.login)) {
                     usersArray.remove(i);
                     deleted = true;
-                    Toast.makeText(context, "Konto " + login + " usunięte" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Konto " + Session.login + " usunięte" , Toast.LENGTH_SHORT).show();
                     break;
                 }
             }
@@ -91,7 +92,7 @@ public class JSONCommunicator {
             Toast.makeText(context, "Nie znaleziono konta do usunięcia" , Toast.LENGTH_SHORT).show();
     }
 
-    public void showAccounts() {
+    public void showAccounts() { //debugging only
         try {
             JSONObject jsonObject = new JSONObject(readJson());
             JSONArray usersArray = jsonObject.getJSONArray("users");
@@ -112,7 +113,7 @@ public class JSONCommunicator {
         }
     }
 
-    public String readJson() {
+    private String readJson() {
         String json = null;
         File file = new File(context.getFilesDir(), "database.json");
         if(!file.exists()) {

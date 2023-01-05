@@ -6,9 +6,11 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextView userLoginTxt;
     private AppCompatButton settingsBtn;
     private AppCompatButton startBtn;
     private AppCompatButton statsBtn;
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        userLoginTxt = findViewById(R.id.user_login);
         settingsBtn = findViewById(R.id.settings_btn);
         startBtn = findViewById(R.id.start_btn);
         statsBtn = findViewById(R.id.stats_btn);
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 openRanking();
             }
         });
+
+        userLoginTxt.setText(Session.login);
     }
 
     private void start() {

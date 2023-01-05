@@ -22,6 +22,21 @@
             android:layout_marginStart="16dp"
             android:background="@drawable/ic_account" />
 
+        <TextView
+            android:id="@+id/user_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/account_btn"
+            android:layout_alignTop="@+id/account_btn"
+            android:layout_alignBottom="@id/account_btn"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:text="login"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/settings_btn"
             android:layout_width="32dp"
