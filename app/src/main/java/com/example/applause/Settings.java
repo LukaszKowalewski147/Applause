@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,13 +82,13 @@ public class Settings extends AppCompatActivity {
         showClapInstructionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showClapInstruction();
             }
         });
         showProximityInstructionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showProximityInstruction();
             }
         });
         logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +98,15 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+        prepareValues();
+    }
+
+    private void prepareValues() {
         accountLoginInfoTxt.setText(Session.login);
+        privateModeSwitch.setChecked(Session.privateAccount);
+        appSoundsSwitch.setChecked(Session.soundsEnabled);
+        showClapInstructionSwitch.setChecked(Session.alwaysShowClapInstruction);
+        showProximityInstructionSwitch.setChecked(Session.alwaysShowProximityInstruction);
     }
 
     private void changePassword() {
@@ -129,11 +138,11 @@ public class Settings extends AppCompatActivity {
     }
 
     private void showClapInstruction() {
-
+        Toast.makeText(this, "Comming soon", Toast.LENGTH_SHORT).show();
     }
 
     private void showProximityInstruction() {
-
+        Toast.makeText(this, "Comming soon", Toast.LENGTH_SHORT).show();
     }
 
     private void logout() {

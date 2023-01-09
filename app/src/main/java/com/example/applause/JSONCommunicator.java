@@ -30,6 +30,11 @@ public class JSONCommunicator {
                 JSONObject user = usersArray.getJSONObject(i);
                 if (user.getString("login").equals(login)) {
                     if (user.getString("password").equals(password)) {
+                        JSONObject settings = user.getJSONObject("settings");
+                        Session.privateAccount = settings.getBoolean("privateAccount");
+                        Session.soundsEnabled = settings.getBoolean("soundsEnabled");
+                        Session.alwaysShowClapInstruction = settings.getBoolean("alwaysShowClapInstruction");
+                        Session.alwaysShowProximityInstruction = settings.getBoolean("alwaysShowProximityInstruction");
                         return true;
                     }
                 }
@@ -53,12 +58,21 @@ public class JSONCommunicator {
                 }
             }
             JSONObject newAccount = new JSONObject();
-            JSONArray shotsArr = new JSONArray();
+            JSONObject settings = new JSONObject();
+            JSONArray shotsArray = new JSONArray();
+
+            settings.put("privateAccount", false);
+            settings.put("soundsEnabled", true);
+            settings.put("alwaysShowClapInstruction", true);
+            settings.put("alwaysShowProximityInstruction", true);
 
             newAccount.put("login", login);
             newAccount.put("password", password);
-            newAccount.put("shots", shotsArr);
+            newAccount.put("settings", settings);
+            newAccount.put("shots", shotsArray);
+
             usersArray.put(newAccount);
+
             writeToFile(jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
