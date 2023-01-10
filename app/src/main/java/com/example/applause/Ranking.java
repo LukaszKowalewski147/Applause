@@ -37,7 +37,7 @@ public class Ranking extends AppCompatActivity implements AdapterView.OnItemSele
         users = new ArrayList<>();
         mockUsers();
 
-        setAdapter();
+        setAdapter(0);
     }
 
     private void mockUsers() {
@@ -68,8 +68,8 @@ public class Ranking extends AppCompatActivity implements AdapterView.OnItemSele
         users.add(user12);
     }
 
-    private void setAdapter() {
-        adapter = new CustomAdapter(this, users);
+    private void setAdapter(int rankingTypeIndex) {
+        adapter = new CustomAdapter(this, users, rankingTypeIndex);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -79,6 +79,7 @@ public class Ranking extends AppCompatActivity implements AdapterView.OnItemSele
         ((TextView) adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.native_dark_red));
         ((TextView) adapterView.getChildAt(0)).setTextSize(16);
         ((TextView) adapterView.getChildAt(0)).setTypeface(null, Typeface.BOLD);
+        setAdapter(i);
     }
 
     @Override

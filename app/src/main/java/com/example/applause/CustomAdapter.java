@@ -15,10 +15,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     private Context context;
     private ArrayList<User> users;
+    private int rankingTypeIndex;
 
-    public CustomAdapter (Context context, ArrayList<User> users) {
+    public CustomAdapter (Context context, ArrayList<User> users, int rankingTypeIndex) {
         this.context = context;
         this.users = users;
+        this.rankingTypeIndex = rankingTypeIndex;
     }
 
     @NonNull
@@ -33,11 +35,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         User user = users.get(position);
+        String[] rankingTypes = context.getResources().getStringArray(R.array.ranking_types);
+        String rankingType = rankingTypes[rankingTypeIndex];
         int rankingPosition = position + 1;
 
         holder.ranking_position.setText(String.valueOf(rankingPosition));
         holder.username.setText(user.getUsername());
-        holder.speed_txt.setText(user.getSpeed() + "/min");
+        holder.parameterName.setText(rankingType);
+        holder.parameterValue.setText(user.getSpeed() + "/min");
     }
 
     @Override
@@ -47,7 +52,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView ranking_position, username, speed_txt;
+        TextView ranking_position, username, parameterName, parameterValue;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,7 +60,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
             ranking_position = itemView.findViewById(R.id.ranking_position);
             username = itemView.findViewById(R.id.username);
-            speed_txt = itemView.findViewById(R.id.parameter);
+            parameterName = itemView.findViewById(R.id.parameter_txt);
+            parameterValue = itemView.findViewById(R.id.parameter);
         }
 
         @Override

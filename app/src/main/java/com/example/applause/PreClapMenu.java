@@ -64,5 +64,12 @@ public class PreClapMenu extends AppCompatActivity {
         Intent intent = new Intent(this, ClapListener.class);
         intent.putExtra("sessionTypeKey", sessionType);
         startActivity(intent);
+        if (Session.alwaysShowClapInstruction)
+            showClapInstruction();
+    }
+
+    private void showClapInstruction() {
+        Intent intent = new Intent(this, ClapInstruction.class);
+        startActivity(intent);
     }
 }

@@ -59,7 +59,7 @@ public class JSONCommunicator {
             }
             JSONObject newAccount = new JSONObject();
             JSONObject settings = new JSONObject();
-            JSONArray shotsArray = new JSONArray();
+            JSONArray clapsArray = new JSONArray();
 
             settings.put("privateAccount", false);
             settings.put("soundsEnabled", true);
@@ -69,7 +69,7 @@ public class JSONCommunicator {
             newAccount.put("login", login);
             newAccount.put("password", password);
             newAccount.put("settings", settings);
-            newAccount.put("shots", shotsArray);
+            newAccount.put("claps", clapsArray);
 
             usersArray.put(newAccount);
 
@@ -104,6 +104,77 @@ public class JSONCommunicator {
         }
         if (!deleted)
             Toast.makeText(context, "Nie znaleziono konta do usunięcia" , Toast.LENGTH_SHORT).show();
+    }
+    
+    public void updateSettings() {
+        try {
+            JSONObject jsonObject = new JSONObject(readJson());
+            JSONArray usersArray = jsonObject.getJSONArray("users");
+            JSONObject user = null;
+            for (int i = 0; i < usersArray.length(); i++) {
+                user = usersArray.getJSONObject(i);
+                if (user.getString("login").equals(Session.login)) {
+                    break;
+                }
+            }
+            if (user == null)
+                throw new JSONException("nie znaleziono zalogowanego uzytkownika");
+            JSONObject settings = user.getJSONObject("settings");
+            settings.put("privateAccount", Session.privateAccount);
+            settings.put("soundsEnabled", Session.soundsEnabled);
+            settings.put("alwaysShowClapInstruction", Session.alwaysShowClapInstruction);
+            settings.put("alwaysShowProximityInstruction", Session.alwaysShowProximityInstruction);
+
+            writeToFile(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Nie udało się zaktualizować ustawień" , Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void updatePassword(String newPassword) {
+        try {
+            JSONObject jsonObject = new JSONObject(readJson());
+            JSONArray usersArray = jsonObject.getJSONArray("users");
+            JSONObject user = null;
+            for (int i = 0; i < usersArray.length(); i++) {
+                user = usersArray.getJSONObject(i);
+                if (user.getString("login").equals(Session.login)) {
+                    break;
+                }
+            }
+            if (user == null)
+                throw new JSONException("nie znaleziono zalogowanego uzytkownika");
+
+            user.put("password", newPassword);
+
+            writeToFile(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Nie udało się zmienić hasła" , Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public String getCurrentPassword() {
+        String password = null;
+        try {
+            JSONObject jsonObject = new JSONObject(readJson());
+            JSONArray usersArray = jsonObject.getJSONArray("users");
+            JSONObject user = null;
+            for (int i = 0; i < usersArray.length(); i++) {
+                user = usersArray.getJSONObject(i);
+                if (user.getString("login").equals(Session.login)) {
+                    break;
+                }
+            }
+            if (user == null)
+                throw new JSONException("nie znaleziono zalogowanego uzytkownika");
+            password = user.getString("password");
+        }  catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Nie udało się zaktualizować ustawień" , Toast.LENGTH_SHORT).show();
+        }
+        return password;
     }
 
     public void showAccounts() { //debugging only

@@ -3,7 +3,7 @@
     {
       "login": "ukasz",
       "password": "1234",
-      "shots": [
+      "claps": [
         {
           "sessionType": "SPEED",
           "avg": 100,
@@ -31,7 +31,7 @@
     {
       "login": "student",
       "password": "0000",
-      "shots": [
+      "claps": [
         {
           "sessionType": "SPEED",
           "avg": 90,

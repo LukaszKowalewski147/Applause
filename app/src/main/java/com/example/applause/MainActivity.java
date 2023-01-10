@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void start() {
-        Intent intent = new Intent(this, Instruction.class);
+        Intent intent = new Intent(this, PreClapMenu.class);
         startActivity(intent);
     }
 

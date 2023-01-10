@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class Instruction extends AppCompatActivity {
+public class ClapInstruction extends AppCompatActivity {
 
     private ImageView instruction;
     private AppCompatButton understandBtn;
@@ -27,13 +27,8 @@ public class Instruction extends AppCompatActivity {
         understandBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goNext();
+                finish();
             }
         });
-    }
-
-    private void goNext() {
-        Intent intent = new Intent(this, PreClapMenu.class);
-        startActivity(intent);
     }
 }

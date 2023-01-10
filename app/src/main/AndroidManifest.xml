@@ -21,7 +21,7 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Instruction"
+            android:name=".ClapInstruction"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity

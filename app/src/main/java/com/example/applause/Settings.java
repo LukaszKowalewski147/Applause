@@ -43,34 +43,36 @@ public class Settings extends AppCompatActivity {
         showProximityInstructionBtn = findViewById(R.id.show_proximity_instruction_btn);
         logoutBtn = findViewById(R.id.logout_btn);
 
+        prepareValues();
+
         privateModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+                manageSettingsSwitches();
             }
         });
         appSoundsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+                manageSettingsSwitches();
             }
         });
         showClapInstructionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+                manageSettingsSwitches();
             }
         });
         showProximityInstructionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+                manageSettingsSwitches();
             }
         });
         changePasswordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                changePassword();
             }
         });
         deleteAccountBtn.setOnClickListener(new View.OnClickListener() {
@@ -97,8 +99,6 @@ public class Settings extends AppCompatActivity {
                 logout();
             }
         });
-
-        prepareValues();
     }
 
     private void prepareValues() {
@@ -110,7 +110,8 @@ public class Settings extends AppCompatActivity {
     }
 
     private void changePassword() {
-
+        ChangePasswordManager changePasswordManager = new ChangePasswordManager();
+        changePasswordManager.show(getSupportFragmentManager(), "change_password_manager");
     }
 
     private void deleteAccount() {
@@ -137,8 +138,18 @@ public class Settings extends AppCompatActivity {
                 .show();
     }
 
+    private void manageSettingsSwitches() {
+        Session.privateAccount = privateModeSwitch.isChecked();
+        Session.soundsEnabled = appSoundsSwitch.isChecked();
+        Session.alwaysShowClapInstruction = showClapInstructionSwitch.isChecked();
+        Session.alwaysShowProximityInstruction = showProximityInstructionSwitch.isChecked();
+        JSONCommunicator communicator = new JSONCommunicator(this);
+        communicator.updateSettings();
+    }
+
     private void showClapInstruction() {
-        Toast.makeText(this, "Comming soon", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ClapInstruction.class);
+        startActivity(intent);
     }
 
     private void showProximityInstruction() {
