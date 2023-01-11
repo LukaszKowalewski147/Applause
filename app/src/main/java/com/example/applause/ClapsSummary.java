@@ -121,10 +121,39 @@ public class ClapsSummary extends AppCompatActivity {
     }
 
     private void saveResults() {
-
-        //TODO: handle save
-
-        Toast.makeText(this, "Comming soon", Toast.LENGTH_SHORT).show();
+        boolean success = false;
+        JSONCommunicator jsonCommunicator = new JSONCommunicator(this);
+        switch (sessionType) {
+            case SPEED:
+                JSONClap<Double> speedSession = new JSONClap<>(sessionType, clapsSession.getAvgSpeed(), clapsSession.getMaxSpeed());
+                jsonCommunicator.saveClapsSession(speedSession);
+                success = true;
+                break;
+            case FORCE:
+                JSONClap<Double> forceSession = new JSONClap<>(sessionType, clapsSession.getAvgForce(), clapsSession.getMaxForce());
+                jsonCommunicator.saveClapsSession(forceSession);
+                success = true;
+                break;
+            case QUALITY:
+                JSONClap<Integer> qualitySession = new JSONClap<>(sessionType, clapsSession.getQuality());
+                jsonCommunicator.saveClapsSession(qualitySession);
+                success = true;
+                break;
+            case QUANTITY:
+                JSONClap<Integer> quantitySession = new JSONClap<>(sessionType, clapsSession.getQuantity());
+                jsonCommunicator.saveClapsSession(quantitySession);
+                success = true;
+                break;
+            case REFLEX:
+                JSONClap<Integer> reflexSession = new JSONClap<>(sessionType, clapsSession.getReflex());
+                jsonCommunicator.saveClapsSession(reflexSession);
+                success = true;
+                break;
+        }
+        if (success) {
+            Toast.makeText(this, "Zapisano", Toast.LENGTH_SHORT).show();
+            saveBtn.setClickable(false);
+        }
     }
 
     private void backToMenu() {

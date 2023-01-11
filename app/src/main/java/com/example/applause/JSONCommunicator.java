@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class JSONCommunicator {
 
@@ -20,6 +21,116 @@ public class JSONCommunicator {
 
     public JSONCommunicator(Context context) {
         this.context = context;
+    }
+
+    public void saveClapsSession(JSONClap session) {
+        try {
+            JSONObject jsonObject = new JSONObject(readJson());
+            JSONArray usersArray = jsonObject.getJSONArray("users");
+            JSONObject user = null;
+            for (int i = 0; i < usersArray.length(); i++) {
+                user = usersArray.getJSONObject(i);
+                if (user.getString("login").equals(Session.login)) {
+                    break;
+                }
+            }
+            if (user == null)
+                throw new JSONException("nie znaleziono zalogowanego uzytkownika");
+
+            JSONArray clapsArray = user.getJSONArray("claps");
+            JSONObject clapsSession = new JSONObject();
+            clapsSession.put("sessionType", session.getSessionType().toString());
+
+            switch (session.getSessionType()) {
+                case SPEED:
+                case FORCE:
+                    clapsSession.put("avg", (double) session.getAvgParameter());
+                    clapsSession.put("max", (double) session.getMaxParameter());
+                    break;
+                case QUALITY:
+                case QUANTITY:
+                case REFLEX:
+                    clapsSession.put("avg", (int) session.getAvgParameter());
+                    break;
+            }
+            clapsArray.put(clapsSession);
+            writeToFile(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Niepowodzenie" , Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public ArrayList<ClapsSession> getAllClapsSessions(String username) {
+        ArrayList<ClapsSession> clapsSessions = new ArrayList<>();
+        try {
+            JSONObject jsonObject = new JSONObject(readJson());
+            JSONArray usersArray = jsonObject.getJSONArray("users");
+            JSONObject user = null;
+            for (int i = 0; i < usersArray.length(); i++) {
+                user = usersArray.getJSONObject(i);
+                if (user.getString("login").equals(username)) {
+                    break;
+                }
+            }
+            if (user == null)
+                throw new JSONException("nie znaleziono uzytkownika " + username);
+
+            JSONArray clapsArray = user.getJSONArray("claps");
+
+            for (int i = 0; i < clapsArray.length(); i++) {
+                JSONObject clapsSessionJSON = clapsArray.getJSONObject(i);
+                SessionType sessionType = SessionType.valueOf(clapsSessionJSON.getString("sessionType"));
+                ClapsSession clapsSession = new ClapsSession(sessionType);
+
+                switch (sessionType) {
+                    case SPEED:
+                        clapsSession.setAvgSpeed(clapsSessionJSON.getDouble("avg"));
+                        clapsSession.setMaxSpeed(clapsSessionJSON.getDouble("max"));
+                        break;
+                    case FORCE:
+                        clapsSession.setAvgForce(clapsSessionJSON.getDouble("avg"));
+                        clapsSession.setMaxForce(clapsSessionJSON.getDouble("max"));
+                        break;
+                    case QUALITY:
+                        clapsSession.setQuality(clapsSessionJSON.getInt("avg"));
+                        break;
+                    case QUANTITY:
+                        clapsSession.setQuantity(clapsSessionJSON.getInt("avg"));
+                        break;
+                    case REFLEX:
+                        clapsSession.setReflex(clapsSessionJSON.getInt("avg"));
+                        break;
+                }
+                clapsSessions.add(clapsSession);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Niepowodzenie" , Toast.LENGTH_SHORT).show();
+        }
+        return clapsSessions;
+    }
+
+    public ArrayList<User> getAllPublicUsers() {
+        ArrayList<User> publicUsers = new ArrayList<>();
+        try {
+            JSONObject jsonObject = new JSONObject(readJson());
+            JSONArray usersArray = jsonObject.getJSONArray("users");
+            JSONObject userJSON = null;
+            for (int i = 0; i < usersArray.length(); i++) {
+                userJSON = usersArray.getJSONObject(i);
+                JSONObject userSettings = userJSON.getJSONObject("settings");
+                if (userSettings.getBoolean("privateAccount"))
+                    continue;
+
+                User user = new User(userJSON.getString("login"));
+                publicUsers.add(user);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Niepowodzenie" , Toast.LENGTH_SHORT).show();
+        }
+        return publicUsers;
     }
 
     public boolean loginConfirmed(String login, String password) {

@@ -42,7 +42,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.ranking_position.setText(String.valueOf(rankingPosition));
         holder.username.setText(user.getUsername());
         holder.parameterName.setText(rankingType);
-        holder.parameterValue.setText(user.getSpeed() + "/min");
+        holder.parameterValue.setText(user.getSpeedAvg() + "/min");
     }
 
     @Override

@@ -3,6 +3,13 @@
     {
       "login": "ukasz",
       "password": "1234",
+      "settings":
+      {
+        "privateAccount": false,
+        "soundsEnabled": true,
+        "alwaysShowClapInstruction": false,
+        "alwaysShowProximityInstruction": false
+      },
       "claps": [
         {
           "sessionType": "SPEED",
@@ -31,6 +38,13 @@
     {
       "login": "student",
       "password": "0000",
+      "settings":
+      {
+        "privateAccount": true,
+        "soundsEnabled": false,
+        "alwaysShowClapInstruction": true,
+        "alwaysShowProximityInstruction": false
+      },
       "claps": [
         {
           "sessionType": "SPEED",

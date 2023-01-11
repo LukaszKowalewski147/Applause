@@ -34,10 +34,24 @@ public class Ranking extends AppCompatActivity implements AdapterView.OnItemSele
         rankingTypeSpinner.setAdapter(adapter);
         rankingTypeSpinner.setOnItemSelectedListener(this);
 
-        users = new ArrayList<>();
+        users = getPublicUsers();
+        prepareUsersData();
         mockUsers();
 
         setAdapter(0);
+    }
+
+    private ArrayList<User> getPublicUsers() {
+        JSONCommunicator jsonCommunicator = new JSONCommunicator(this);
+        return jsonCommunicator.getAllPublicUsers();
+    }
+
+    private void prepareUsersData() {
+        JSONCommunicator jsonCommunicator = new JSONCommunicator(this);
+        for (User user : users) {
+            user.setClapsSessions(jsonCommunicator.getAllClapsSessions(user.getUsername()));
+            user.calculateStats();
+        }
     }
 
     private void mockUsers() {
