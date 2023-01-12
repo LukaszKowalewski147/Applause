@@ -90,10 +90,10 @@ public class ClapsSummary extends AppCompatActivity {
 
     private void prepareSpeedSummary() {
         maxParamTxt.setText("Maksymalna szybkość:");
-        maxParam.setText(clapsSession.getMaxSpeed() + "/s");
+        maxParam.setText(clapsSession.getMaxSpeed() + "/min");
 
         avgParamTxt.setText("Średnia szybkość:");
-        avgParam.setText(clapsSession.getAvgSpeed() + "/s");
+        avgParam.setText(clapsSession.getAvgSpeed() + "/min");
     }
 
     private void prepareForceSummary() {

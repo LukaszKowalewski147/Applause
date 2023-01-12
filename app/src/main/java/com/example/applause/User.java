@@ -11,11 +11,11 @@ public class User {
     private double forceAvg;
     private double forceMax;
     private double qualityAvg;
-    private double qualityMax;
+    private int qualityMax;
     private double quantityAvg;
-    private double quantityMax;
+    private int quantityMax;
     private double reactionTimeAvg;
-    private double reactionTimeMax;
+    private int reactionTimeMax;
 
     public User(String username) {
         this.username = username;
@@ -26,148 +26,157 @@ public class User {
         this.speedAvg = speedAvg;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public ArrayList<ClapsSession> getClapsSessions() {
-        return clapsSessions;
-    }
-
     public void setClapsSessions(ArrayList<ClapsSession> clapsSessions) {
         this.clapsSessions = clapsSessions;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public double getSpeedAvg() {
         return speedAvg;
     }
 
-    public void setSpeedAvg(double speedAvg) {
-        this.speedAvg = speedAvg;
-    }
-
     public double getSpeedMax() {
         return speedMax;
-    }
-
-    public void setSpeedMax(double speedMax) {
-        this.speedMax = speedMax;
     }
 
     public double getForceAvg() {
         return forceAvg;
     }
 
-    public void setForceAvg(double forceAvg) {
-        this.forceAvg = forceAvg;
-    }
-
     public double getForceMax() {
         return forceMax;
-    }
-
-    public void setForceMax(double forceMax) {
-        this.forceMax = forceMax;
     }
 
     public double getQualityAvg() {
         return qualityAvg;
     }
 
-    public void setQualityAvg(double qualityAvg) {
-        this.qualityAvg = qualityAvg;
-    }
-
-    public double getQualityMax() {
+    public int getQualityMax() {
         return qualityMax;
-    }
-
-    public void setQualityMax(double qualityMax) {
-        this.qualityMax = qualityMax;
     }
 
     public double getQuantityAvg() {
         return quantityAvg;
     }
 
-    public void setQuantityAvg(double quantityAvg) {
-        this.quantityAvg = quantityAvg;
-    }
-
-    public double getQuantityMax() {
+    public int getQuantityMax() {
         return quantityMax;
-    }
-
-    public void setQuantityMax(double quantityMax) {
-        this.quantityMax = quantityMax;
     }
 
     public double getReactionTimeAvg() {
         return reactionTimeAvg;
     }
 
-    public void setReactionTimeAvg(double reactionTimeAvg) {
-        this.reactionTimeAvg = reactionTimeAvg;
-    }
-
-    public double getReactionTimeMax() {
+    public int getReactionTimeMax() {
         return reactionTimeMax;
     }
 
-    public void setReactionTimeMax(double reactionTimeMax) {
-        this.reactionTimeMax = reactionTimeMax;
-    }
-
     public void calculateStats() {
-        calculateSpeedAvg();
-        calculateSpeedMax();
-        calculateForceAvg();
-        calculateForceMax();
-        calculateQualityAvg();
-        calculateQualityMax();
-        calculateQuantityAvg();
-        calculateQuantityMax();
-        calculateReflexAvg();
-        calculateReflexMax();
+        calculateSpeed();
+        calculateForce();
+        calculateQuality();
+        calculateQuantity();
+        calculateReflex();
     }
 
-    private void calculateSpeedAvg() {
+    private void calculateSpeed() {
+        int speedSessions = 0;
+        double speedSum = 0.0d;
+        double speedMax = 0.0d;
 
+        for (int i = 0; i < clapsSessions.size(); i++) {
+            ClapsSession session = clapsSessions.get(i);
+            if (session.getSessionType() == SessionType.SPEED) {
+                speedSessions++;
+                speedSum += session.getAvgSpeed();
+                if (session.getMaxSpeed() > speedMax)
+                    speedMax = session.getMaxSpeed();
+            }
+        }
+        if (speedSessions > 0)
+            speedAvg = Helper.changePrecision(speedSum / speedSessions, 2);
+        this.speedMax = speedMax;
     }
 
-    private void calculateSpeedMax() {
+    private void calculateForce() {
+        int forceSessions = 0;
+        double forceSum = 0.0d;
+        double forceMax = 0.0d;
 
+        for (int i = 0; i < clapsSessions.size(); i++) {
+            ClapsSession session = clapsSessions.get(i);
+            if (session.getSessionType() == SessionType.FORCE) {
+                forceSessions++;
+                forceSum += session.getAvgForce();
+                if (session.getMaxForce() > forceMax)
+                    forceMax = session.getMaxForce();
+            }
+        }
+        if (forceSessions > 0)
+            forceAvg = Helper.changePrecision(forceSum / forceSessions, 2);
+        this.forceMax = forceMax;
     }
 
-    private void calculateForceAvg() {
+    private void calculateQuality() {
+        int qualitySessions = 0;
+        int qualitySum = 0;
+        int qualityMax = 0;
 
+        for (int i = 0; i < clapsSessions.size(); i++) {
+            ClapsSession session = clapsSessions.get(i);
+            if (session.getSessionType() == SessionType.QUALITY) {
+                int quality = session.getQuality();
+                qualitySessions++;
+                qualitySum += quality;
+                if (quality > qualityMax)
+                    qualityMax = quality;
+            }
+        }
+        if (qualitySessions > 0)
+            qualityAvg = Helper.changePrecision((double) qualitySum / qualitySessions, 2);
+        this.qualityMax = qualityMax;
     }
 
-    private void calculateForceMax() {
+    private void calculateQuantity() {
+        int quantitySessions = 0;
+        int quantitySum = 0;
+        int quantityMax = 0;
 
+        for (int i = 0; i < clapsSessions.size(); i++) {
+            ClapsSession session = clapsSessions.get(i);
+            if (session.getSessionType() == SessionType.QUANTITY) {
+                int quantity = session.getQuantity();
+                quantitySessions++;
+                quantitySum += quantity;
+                if (quantity > quantityMax)
+                    quantityMax = quantity;
+            }
+        }
+        if (quantitySessions > 0)
+            quantityAvg = Helper.changePrecision((double) quantitySum / quantitySessions, 2);
+        this.quantityMax = quantityMax;
     }
 
-    private void calculateQualityAvg() {
+    private void calculateReflex() {
+        int reflexSessions = 0;
+        int reflexSum = 0;
+        int reflexMax = 0;
 
-    }
-
-    private void calculateQualityMax() {
-
-    }
-
-    private void calculateQuantityAvg() {
-
-    }
-
-    private void calculateQuantityMax() {
-
-    }
-
-    private void calculateReflexAvg() {
-
-    }
-
-    private void calculateReflexMax() {
-
+        for (int i = 0; i < clapsSessions.size(); i++) {
+            ClapsSession session = clapsSessions.get(i);
+            if (session.getSessionType() == SessionType.REFLEX) {
+                int reflex = session.getReflex();
+                reflexSessions++;
+                reflexSum += reflex;
+                if (reflex < reflexMax)
+                    reflexMax = reflex;
+            }
+        }
+        if (reflexSessions > 0)
+            reactionTimeAvg = Helper.changePrecision((double) reflexSum / reflexSessions, 2);
+        reactionTimeMax = reflexMax;
     }
 }

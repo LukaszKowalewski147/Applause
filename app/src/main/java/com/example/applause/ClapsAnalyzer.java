@@ -89,6 +89,7 @@ public class ClapsAnalyzer {
         }
         totalTimeInSeconds = getTimeInSeconds(totalTime);
         avgSpeed = claps.size() / totalTimeInSeconds; // claps / second
+        avgSpeed *= 60; // claps / minute
         return Helper.changePrecision(avgSpeed, 2);
     }
 
