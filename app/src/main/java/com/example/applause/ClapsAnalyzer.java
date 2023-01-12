@@ -162,7 +162,7 @@ public class ClapsAnalyzer {
             Double klasniecieCzas = getTimeInSeconds(clap.getTime());
 
             if(klasniecieCzas == sredniaSumaCzasuKlasniec ){
-                roznicaProcentowaCzasu.add(1.0);
+                roznicaProcentowaCzasu.add(0.0);
             } else if (klasniecieCzas > sredniaSumaCzasuKlasniec) {
                 roznicaProcentowaCzasu.add((klasniecieCzas - sredniaSumaCzasuKlasniec) / klasniecieCzas * 100);
             }else {
@@ -185,7 +185,7 @@ public class ClapsAnalyzer {
             Double silaMoc = clap.getzAcceleration();
 
             if(silaMoc == sredniaSumaMocyKlasniec ){
-                roznicaProcentowaSily.add(1.0);
+                roznicaProcentowaSily.add(0.0);
             } else if (silaMoc > sredniaSumaMocyKlasniec) {
                 roznicaProcentowaSily.add((silaMoc - sredniaSumaMocyKlasniec) / silaMoc * 100);
             }else {
