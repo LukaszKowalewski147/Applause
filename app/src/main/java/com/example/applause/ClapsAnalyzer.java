@@ -138,6 +138,10 @@ public class ClapsAnalyzer {
     }
 
     private int calculateQuality() {
+        for(Clap clap : claps){
+
+        }
+
         int quality = 0;
         return quality;
     }
