@@ -43,9 +43,13 @@ public class Registration extends AppCompatActivity {
         String login = loginInput.getText().toString();
         String password = passwordInput.getText().toString();
         String repeatPassword = repeatPasswordInput.getText().toString();
+        if (login.matches("") || password.matches("") || repeatPassword.matches("")) {
+            registrationHint.setText("Proszę wypełnić wszsytkie pola");
+            Toast.makeText(this, "Niepowodzenie", Toast.LENGTH_SHORT).show();
+        }
         if (!password.equals(repeatPassword)) {
             registrationHint.setText("Wpisane hasła nie są identyczne");
-            Toast.makeText(this, "Wpisane hasła nie są identyczne", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Niepowodzenie", Toast.LENGTH_SHORT).show();
             return;
         }
         JSONCommunicator jsonCommunicator = new JSONCommunicator(this);

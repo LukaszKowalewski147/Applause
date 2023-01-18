@@ -149,7 +149,7 @@ public class Ranking extends AppCompatActivity implements AdapterView.OnItemSele
                 Collections.sort(users, new Comparator<User>() {
                     @Override
                     public int compare(User user1, User user2) {
-                        return Double.compare(user2.getReactionTimeAvg(), user1.getReactionTimeAvg());
+                        return Double.compare(user1.getReactionTimeAvg(), user2.getReactionTimeAvg());
                     }
                 });
                 break;
@@ -157,38 +157,10 @@ public class Ranking extends AppCompatActivity implements AdapterView.OnItemSele
                 Collections.sort(users, new Comparator<User>() {
                     @Override
                     public int compare(User user1, User user2) {
-                        return Double.compare(user2.getReactionTimeMax(), user1.getReactionTimeMax());
+                        return Double.compare(user1.getReactionTimeMax(), user2.getReactionTimeMax());
                     }
                 });
                 break;
         }
-    }
-
-    private void mockUsers() {
-        User user1 = new User("Lukasz123", 275);
-        User user2 = new User("AFGVaerg", 100);
-        User user3 = new User("bbbdfger", 213);
-        User user4 = new User("tt%%%54", 200);
-        User user5 = new User("uiuiuerqwe", 248);
-        User user6 = new User("zxcv", 300);
-        User user7 = new User("1234", 240);
-        User user8 = new User("765i44444", 301);
-        User user9 = new User("BBBgggbBBBBaa", 232);
-        User user10 = new User("afsdf", 299);
-        User user11 = new User("%%$%#^caggbBBBBaa", 212);
-        User user12 = new User("6178298asd@", 198);
-
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-        users.add(user4);
-        users.add(user5);
-        users.add(user6);
-        users.add(user7);
-        users.add(user8);
-        users.add(user9);
-        users.add(user10);
-        users.add(user11);
-        users.add(user12);
     }
 }
