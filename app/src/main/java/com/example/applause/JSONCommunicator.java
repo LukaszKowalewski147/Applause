@@ -120,7 +120,8 @@ public class JSONCommunicator {
             for (int i = 0; i < usersArray.length(); i++) {
                 userJSON = usersArray.getJSONObject(i);
                 JSONObject userSettings = userJSON.getJSONObject("settings");
-                if (userSettings.getBoolean("privateAccount"))
+                if (userSettings.getBoolean("privateAccount")
+                && !userJSON.getString("login").equals(Session.login))
                     continue;
 
                 User user = new User(userJSON.getString("login"));

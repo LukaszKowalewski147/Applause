@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -154,7 +152,8 @@ public class Settings extends AppCompatActivity {
     }
 
     private void showProximityInstruction() {
-        Toast.makeText(this, "Comming soon", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ReflexInstruction.class);
+        startActivity(intent);
     }
 
     private void logout() {

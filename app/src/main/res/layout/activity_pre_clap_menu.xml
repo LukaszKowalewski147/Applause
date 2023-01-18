@@ -78,17 +78,6 @@
                         android:textSize="14dp"/>
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/reflex_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="64dp"
-                        android:layout_margin="8dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/custom_button"
-                        android:text="Czas&#10;reakcji"
-                        android:textColor="@color/white"
-                        android:textSize="14dp"/>
-
-                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/quantity_btn"
                         android:layout_width="match_parent"
                         android:layout_height="64dp"
@@ -96,6 +85,17 @@
                         android:layout_weight="1"
                         android:background="@drawable/custom_button"
                         android:text="Ilość"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/reflex_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button"
+                        android:text="Czas&#10;reakcji"
                         android:textColor="@color/white"
                         android:textSize="14dp"/>
 

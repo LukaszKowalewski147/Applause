@@ -80,6 +80,7 @@ public class PreClapMenu extends AppCompatActivity {
     }
 
     private void showProximityInstruction() {
-
+        Intent intent = new Intent(this, ReflexInstruction.class);
+        startActivity(intent);
     }
 }

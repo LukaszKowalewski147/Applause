@@ -2,10 +2,12 @@ package com.example.applause;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.SwitchCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ public class Login extends AppCompatActivity {
     private AppCompatButton loginBtn;
     private AppCompatButton registrationBtn;
     private AppCompatButton showAccountsBtn;
+    private SwitchCompat loginAdminSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,10 @@ public class Login extends AppCompatActivity {
         loginBtn = findViewById(R.id.login_btn);
         registrationBtn = findViewById(R.id.registration_btn);
         showAccountsBtn = findViewById(R.id.show_accounts_btn);
+        loginAdminSwitch = findViewById(R.id.login_admin_switch);
+
+        loginAdminSwitch.setChecked(false);
+        manageAdminRights();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +53,12 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showAccounts();
+            }
+        });
+        loginAdminSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                manageAdminRights();
             }
         });
 
@@ -72,6 +85,14 @@ public class Login extends AppCompatActivity {
     private void openRegistrationPage() {
         Intent intent = new Intent(this, Registration.class);
         startActivity(intent);
+    }
+
+    private void manageAdminRights() {
+        if (loginAdminSwitch.isChecked()) {
+            showAccountsBtn.setVisibility(View.VISIBLE);
+        } else {
+            showAccountsBtn.setVisibility(View.GONE);
+        }
     }
 
     private void showAccounts() {

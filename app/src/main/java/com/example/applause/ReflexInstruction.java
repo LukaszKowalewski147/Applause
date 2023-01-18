@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class ClapInstruction extends AppCompatActivity {
+public class ReflexInstruction extends AppCompatActivity {
 
     private ImageView instruction;
     private AppCompatButton understandBtn;
@@ -16,7 +16,7 @@ public class ClapInstruction extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clap_instruction);
+        setContentView(R.layout.activity_reflex_instruction);
 
         instruction = findViewById(R.id.instruction_animation);
         understandBtn = findViewById(R.id.understand_btn);

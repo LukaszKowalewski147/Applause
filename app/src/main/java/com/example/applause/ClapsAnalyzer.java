@@ -99,8 +99,8 @@ public class ClapsAnalyzer {
             totalTime += claps.get(i).getTime();
         }
         totalTimeInSeconds = getTimeInSeconds(totalTime);
-        avgSpeed = claps.size() / totalTimeInSeconds; // claps / second
-        avgSpeed *= 60; // claps / minute
+        avgSpeed = claps.size() / totalTimeInSeconds; // claps/second
+        avgSpeed *= 60; // claps/minute
         return Helper.changePrecision(avgSpeed, 2);
     }
 
@@ -116,7 +116,8 @@ public class ClapsAnalyzer {
             if (timePassed < maxSpeed)
                 maxSpeed = timePassed;
         }
-        result = 1000000000.0d / maxSpeed; // sekunda/x = n claps/second
+        result = 1000000000.0d / maxSpeed; // claps/second
+        result *= 60; // claps/minute
         return Helper.changePrecision(result, 2);
     }
 

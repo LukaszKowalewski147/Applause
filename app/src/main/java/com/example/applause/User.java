@@ -163,7 +163,7 @@ public class User {
     private void calculateReflex() {
         int reflexSessions = 0;
         int reflexSum = 0;
-        int reflexMax = 0;
+        int reflexMax = Integer.MAX_VALUE;
 
         for (int i = 0; i < clapsSessions.size(); i++) {
             ClapsSession session = clapsSessions.get(i);

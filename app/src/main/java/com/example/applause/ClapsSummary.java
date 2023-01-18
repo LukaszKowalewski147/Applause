@@ -99,43 +99,43 @@ public class ClapsSummary extends AppCompatActivity {
     }
 
     private void prepareSpeedSummary() {
-        maxParamTxt.setText("Maksymalna szybkość:");
-        maxParam.setText(clapsSession.getMaxSpeed() + "/min");
-
         avgParamTxt.setText("Średnia szybkość:");
         avgParam.setText(clapsSession.getAvgSpeed() + "/min");
+
+        maxParamTxt.setText("Maks. szybkość:");
+        maxParam.setText(clapsSession.getMaxSpeed() + "/min");
     }
 
     private void prepareForceSummary() {
-        maxParamTxt.setText("Maksymalna siła:");
-        maxParam.setText(clapsSession.getMaxForce() + "N");
-
         avgParamTxt.setText("Średnia siła:");
         avgParam.setText(clapsSession.getAvgForce() + "N");
+
+        maxParamTxt.setText("Maks. siła:");
+        maxParam.setText(clapsSession.getMaxForce() + "N");
     }
 
     private void prepareQualitySummary() {
-        maxParamTxt.setText("Jakość:");
-        maxParam.setText(clapsSession.getQuality() + "%");
+        avgParamTxt.setText("Jakość:");
+        avgParam.setText(clapsSession.getQuality() + "%");
 
-        avgParamTxt.setText("");
-        avgParam.setText("");
+        maxParamTxt.setText("");
+        maxParam.setText("");
     }
 
     private void prepareQuantitySummary() {
-        maxParamTxt.setText("Ilość klaśnięć:");
-        maxParam.setText(clapsSession.getQuantity() + "");
+        avgParamTxt.setText("Ilość klaśnięć:");
+        avgParam.setText(clapsSession.getQuantity() + "");
 
-        avgParamTxt.setText("");
-        avgParam.setText("");
+        maxParamTxt.setText("");
+        maxParam.setText("");
     }
 
     private void prepareReflexSummary() {
-        maxParamTxt.setText("Czas reakcji:");
-        maxParam.setText(clapsSession.getReflex() + "ms");
+        avgParamTxt.setText("Czas reakcji:");
+        avgParam.setText(clapsSession.getReflex() + "ms");
 
-        avgParamTxt.setText("");
-        avgParam.setText("");
+        maxParamTxt.setText("");
+        maxParam.setText("");
     }
 
     private void saveResults() {
