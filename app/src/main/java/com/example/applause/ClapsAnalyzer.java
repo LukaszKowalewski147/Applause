@@ -3,10 +3,11 @@ package com.example.applause;
 import java.util.LinkedList;
 
 public class ClapsAnalyzer {
-    private final LinkedList<AccelerationVector> accelerationVectors;
+    private LinkedList<AccelerationVector> accelerationVectors;
+    private LinkedList<Clap> claps;
     private final SessionType sessionType;
-    private final LinkedList<Clap> claps;
-    private final int threshold;
+    private long reactionTime;
+    private int threshold;
 
     public ClapsAnalyzer(LinkedList<AccelerationVector> accelerationVectors, SessionType sessionType) {
         this.accelerationVectors = accelerationVectors;
@@ -15,14 +16,22 @@ public class ClapsAnalyzer {
         threshold = 60;
     }
 
+    public ClapsAnalyzer(long reactionTime, SessionType sessionType) {
+        this.reactionTime = reactionTime;
+        this.sessionType = sessionType;
+    }
+
     public ClapsSession analyze() {
         ClapsSession clapsSession = new ClapsSession(sessionType);
-        findClaps();
 
-        if (claps.size() < 2)
-            return clapsSession;
-        else
-            clapsSession.setNoClaps(false);
+        if (sessionType != SessionType.REFLEX) {
+            findClaps();
+
+            if (claps.size() < 2)
+                return clapsSession;
+            else
+                clapsSession.setNoClaps(false);
+        }
 
         switch (sessionType) {
             case SPEED:
@@ -39,6 +48,8 @@ public class ClapsAnalyzer {
             case QUANTITY:
                 clapsSession.setQuantity(claps.size());
                 break;
+            case REFLEX:
+                clapsSession.setReflex(calculateReflex());
         }
         return clapsSession;
     }
@@ -84,8 +95,8 @@ public class ClapsAnalyzer {
         double totalTimeInSeconds = 0.0d;
         long totalTime = 0;
 
-        for (int i = 0; i < accelerationVectors.size(); i++) {
-            totalTime += accelerationVectors.get(i).getTime();
+        for (int i = 1; i < claps.size(); i++) {
+            totalTime += claps.get(i).getTime();
         }
         totalTimeInSeconds = getTimeInSeconds(totalTime);
         avgSpeed = claps.size() / totalTimeInSeconds; // claps / second
@@ -138,13 +149,57 @@ public class ClapsAnalyzer {
     }
 
     private int calculateQuality() {
+        LinkedList<Double> timeDeviationPercentage = new LinkedList<>();
+        LinkedList<Double> forceDeviationPercentage = new LinkedList<>();
+        double timeSum = 0.0d;
+        double forceSum = 0.0d;
+        double avgTime = 0.0d;
+        double avgForce = 0.0d;
+        double timeQuality = 0.0d;
+        double forceQuality = 0.0d;
         int quality = 0;
+
+        for (int i = 0; i < claps.size(); i++) {
+            if (i > 0)
+                timeSum += getTimeInSeconds(claps.get(i).getTime());
+            forceSum += claps.get(i).getzAcceleration();
+        }
+
+        avgTime = timeSum / (claps.size() - 1);
+        avgForce = forceSum / claps.size();
+
+        for (int i = 1; i < claps.size(); i++) {
+            double time = getTimeInSeconds(claps.get(i).getTime());
+            double deviation = Math.abs(time - avgTime);
+            double deviationPercentage = (deviation * 100.0d) / avgTime;
+            timeDeviationPercentage.add(deviationPercentage);
+        }
+
+        for (int i = 0; i < timeDeviationPercentage.size(); i++) {
+            timeQuality += timeDeviationPercentage.get(i);
+        }
+
+        timeQuality = 100.0d - (timeQuality / timeDeviationPercentage.size());
+
+        for (int i = 0; i < claps.size(); i++) {
+            double force = claps.get(i).getzAcceleration();
+            double deviation = Math.abs(force - avgForce);
+            double deviationPercentage = (deviation * 100.0d) / avgForce;
+            forceDeviationPercentage.add(deviationPercentage);
+        }
+
+        for (int i = 0; i < forceDeviationPercentage.size(); i++) {
+            forceQuality += forceDeviationPercentage.get(i);
+        }
+
+        forceQuality = 100.0d - (forceQuality / forceDeviationPercentage.size());
+
+        quality = (int) Math.round((timeQuality + forceQuality) / 2);
         return quality;
     }
 
     private int calculateReflex() {
-        int reflex = 0;
-        return reflex;
+        return (int) Math.round(getTimeInMiliseconds(reactionTime));
     }
 
     private double calculateForce(double acceleration) {

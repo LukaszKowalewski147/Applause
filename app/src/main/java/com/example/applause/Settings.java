@@ -12,14 +12,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.SwitchCompat;
 
 public class Settings extends AppCompatActivity {
 
     private TextView accountLoginInfoTxt;
-    private Switch privateModeSwitch;
-    private Switch appSoundsSwitch;
-    private Switch showClapInstructionSwitch;
-    private Switch showProximityInstructionSwitch;
+    private SwitchCompat privateModeSwitch;
+    private SwitchCompat appSoundsSwitch;
+    private SwitchCompat showClapInstructionSwitch;
+    private SwitchCompat showProximityInstructionSwitch;
     private AppCompatButton changePasswordBtn;
     private AppCompatButton deleteAccountBtn;
     private AppCompatButton showClapInstructionBtn;

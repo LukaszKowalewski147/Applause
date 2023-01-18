@@ -16,6 +16,7 @@ public class ClapsSummary extends AppCompatActivity {
     private SessionType sessionType;
     private LinkedList<AccelerationVector> accelerationVectors;
     private ClapsSession clapsSession;
+    private long reactionTime;
 
     private TextView maxParamTxt;
     private TextView maxParam;
@@ -32,11 +33,13 @@ public class ClapsSummary extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             sessionType = (SessionType) extras.get("sessionTypeKey");
-            double[] zArray = (double[]) extras.get("zArrayKey");
-            long[] timeArray = (long[]) extras.get("timeArrayKey");
-            accelerationVectors = Helper.convertToLinkedList(zArray, timeArray);
-        } else {
-            //TODO: handle extras reading
+            if (sessionType != SessionType.REFLEX) {
+                double[] zArray = (double[]) extras.get("zArrayKey");
+                long[] timeArray = (long[]) extras.get("timeArrayKey");
+                accelerationVectors = Helper.convertToLinkedList(zArray, timeArray);
+            } else {
+                reactionTime = (long) extras.get("reflexKey");
+            }
         }
 
         maxParamTxt = findViewById(R.id.max_parameter_txt);
@@ -45,6 +48,8 @@ public class ClapsSummary extends AppCompatActivity {
         avgParam = findViewById(R.id.avg_parameter);
         saveBtn = findViewById(R.id.save_btn);
         mainMenuBtn = findViewById(R.id.main_menu_btn);
+
+        prepareSummary();
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,18 +63,21 @@ public class ClapsSummary extends AppCompatActivity {
                 backToMenu();
             }
         });
-
-        prepareSummary();
     }
 
     private void prepareSummary() {
-        ClapsAnalyzer analyzer = new ClapsAnalyzer(accelerationVectors, sessionType);
-        clapsSession = analyzer.analyze();
-
-        if (clapsSession.isNoClaps())
-        {
-            Toast.makeText(this, "Klaśnij minimum 2 razy!", Toast.LENGTH_SHORT).show();
-            backToMenu();
+        ClapsAnalyzer analyzer;
+        if (sessionType != SessionType.REFLEX) {
+            analyzer = new ClapsAnalyzer(accelerationVectors, sessionType);
+            clapsSession = analyzer.analyze();
+            if (clapsSession.isNoClaps())
+            {
+                Toast.makeText(this, "Klaśnij minimum 2 razy!", Toast.LENGTH_SHORT).show();
+                backToMenu();
+            }
+        } else {
+            analyzer = new ClapsAnalyzer(reactionTime, sessionType);
+            clapsSession = analyzer.analyze();
         }
 
         switch (sessionType) {
@@ -85,6 +93,8 @@ public class ClapsSummary extends AppCompatActivity {
             case QUANTITY:
                 prepareQuantitySummary();
                 break;
+            case REFLEX:
+                prepareReflexSummary();
         }
     }
 
@@ -115,6 +125,14 @@ public class ClapsSummary extends AppCompatActivity {
     private void prepareQuantitySummary() {
         maxParamTxt.setText("Ilość klaśnięć:");
         maxParam.setText(clapsSession.getQuantity() + "");
+
+        avgParamTxt.setText("");
+        avgParam.setText("");
+    }
+
+    private void prepareReflexSummary() {
+        maxParamTxt.setText("Czas reakcji:");
+        maxParam.setText(clapsSession.getReflex() + "ms");
 
         avgParamTxt.setText("");
         avgParam.setText("");

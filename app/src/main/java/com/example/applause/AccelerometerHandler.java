@@ -3,16 +3,14 @@ package com.example.applause;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import java.util.Queue;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-public class AccelerometerHandler extends AppCompatActivity implements SensorEventListener{
+public class AccelerometerHandler extends AppCompatActivity implements SensorEventListener {
 
     private Displacement displacement;
     private SensorManager sensorManager;
@@ -22,7 +20,6 @@ public class AccelerometerHandler extends AppCompatActivity implements SensorEve
     private long lastTime;
     private long time;
     private boolean firstEvent;
-    private AtomicBoolean contactOccured;
 
     public AccelerometerHandler(Context context) {
         displacement = new Displacement();
@@ -33,7 +30,6 @@ public class AccelerometerHandler extends AppCompatActivity implements SensorEve
         lastTime = 0L;
         time = 0L;
         firstEvent = true;
-        contactOccured = new AtomicBoolean(false);
     }
 
     public Queue<AccelerationVector> handleAccelerometerStop() {
@@ -58,15 +54,10 @@ public class AccelerometerHandler extends AppCompatActivity implements SensorEve
             firstEvent = false;
         }
 
-        if (zAxis < -40.0d) {
-            contactOccured.compareAndSet(false, true);
-        }
-
         time = sensorEvent.timestamp - lastTime;
         lastTime = sensorEvent.timestamp;
 
         displacement.addEntry(zAxis, time);
-        //showResults(zAxis, time);
     }
 
     @Override

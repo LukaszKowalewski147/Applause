@@ -9,6 +9,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Applause">
         <activity
+            android:name=".ReflexListener"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".StatsGraph"
             android:exported="true"
             android:screenOrientation="portrait" />

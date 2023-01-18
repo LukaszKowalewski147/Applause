@@ -9,13 +9,12 @@ import android.os.Build;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SoundManager extends AppCompatActivity {
-    private Context context;
+
     private SoundPool soundPool;
     private int countdown;
     private int startClapping;
 
     public SoundManager(Context context) {
-        this.context = context;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -33,11 +32,13 @@ public class SoundManager extends AppCompatActivity {
     }
 
     public void playCountdownSound() {
-        soundPool.play(countdown, 1.0f, 1.0f, 0, 0, 1);
+        if (Session.soundsEnabled)
+            soundPool.play(countdown, 1.0f, 1.0f, 0, 0, 1);
     }
 
     public void playStartClappingSound() {
-        soundPool.play(startClapping, 1.0f, 1.0f, 0, 0, 1);
+        if (Session.soundsEnabled)
+            soundPool.play(startClapping, 1.0f, 1.0f, 0, 0, 1);
     }
 
     @Override

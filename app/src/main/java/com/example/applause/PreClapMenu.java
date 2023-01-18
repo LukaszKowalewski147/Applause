@@ -42,8 +42,7 @@ public class PreClapMenu extends AppCompatActivity {
         qualityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Comming soon", Toast.LENGTH_SHORT).show();
-                //startClapListener(SessionType.QUALITY);
+                startClapListener(SessionType.QUALITY);
             }
         });
         quantityBtn.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +54,7 @@ public class PreClapMenu extends AppCompatActivity {
         reflexBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Comming soon", Toast.LENGTH_SHORT).show();
+                startReflexListener();
             }
         });
     }
@@ -68,8 +67,19 @@ public class PreClapMenu extends AppCompatActivity {
             showClapInstruction();
     }
 
+    private void startReflexListener() {
+        Intent intent = new Intent(this, ReflexListener.class);
+        startActivity(intent);
+        if (Session.alwaysShowProximityInstruction)
+            showProximityInstruction();
+    }
+
     private void showClapInstruction() {
         Intent intent = new Intent(this, ClapInstruction.class);
         startActivity(intent);
+    }
+
+    private void showProximityInstruction() {
+
     }
 }
