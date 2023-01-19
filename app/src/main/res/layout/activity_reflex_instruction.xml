@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/instruction_animation" />
+            android:src="@drawable/reflex_instruction_animation" />
 
     </RelativeLayout>
 
